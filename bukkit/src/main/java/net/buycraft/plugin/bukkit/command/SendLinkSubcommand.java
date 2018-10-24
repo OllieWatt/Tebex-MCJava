@@ -16,13 +16,13 @@ public class SendLinkSubcommand implements Subcommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("buycraft.admin")) {
+        if (!sender.hasPermission("tebex.admin")) {
             sender.sendMessage(ChatColor.RED + plugin.getI18n().get("no_permission"));
             return;
         }
 
         if (args.length != 3 || !(args[1].equalsIgnoreCase("package") || args[1].equalsIgnoreCase("category")) || !StringUtils.isNumeric(args[2])) {
-            sender.sendMessage(ChatColor.RED + "Incorrect syntax: /buycraft sendlink <player> package|category <id>");
+            sender.sendMessage(ChatColor.RED + "Incorrect syntax: /tebex sendlink <player> package|category <id>");
             return;
         }
 

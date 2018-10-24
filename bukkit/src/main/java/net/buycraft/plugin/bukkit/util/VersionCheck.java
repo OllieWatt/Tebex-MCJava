@@ -50,7 +50,7 @@ public class VersionCheck implements Listener {
 
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
-        if (event.getPlayer().hasPermission("buycraft.admin") && !upToDate) {
+        if (event.getPlayer().hasPermission("tebex.admin") && !upToDate) {
             plugin.getPlatform().executeAsyncLater(new Runnable() {
                 @Override
                 public void run() {

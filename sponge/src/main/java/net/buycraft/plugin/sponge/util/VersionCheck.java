@@ -53,7 +53,7 @@ public class VersionCheck {
 
     @Listener
     public void onPlayerJoinEvent(ClientConnectionEvent.Join event) {
-        if (event.getTargetEntity().hasPermission("buycraft.admin") && !upToDate) {
+        if (event.getTargetEntity().hasPermission("tebex.admin") && !upToDate) {
             plugin.getPlatform().executeAsyncLater(() -> {
                 try {
                     event.getTargetEntity().sendMessage(

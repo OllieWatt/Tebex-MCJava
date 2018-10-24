@@ -26,7 +26,7 @@ public class RecentPurchaseSignListener implements Listener {
     public void onSignChange(SignChangeEvent event) {
         boolean ourSign;
         try {
-            ourSign = event.getLine(0).equalsIgnoreCase("[buycraft_rp]");
+            ourSign = event.getLine(0).equalsIgnoreCase("[tebex_rp]");
         } catch (IndexOutOfBoundsException e) {
             return;
         }
@@ -34,8 +34,8 @@ public class RecentPurchaseSignListener implements Listener {
         if (!ourSign)
             return;
 
-        if (!event.getPlayer().hasPermission("buycraft.admin")) {
-            event.getPlayer().sendMessage(ChatColor.RED + "You can't create Buycraft signs.");
+        if (!event.getPlayer().hasPermission("tebex.admin")) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You can't create Tebex signs.");
             return;
         }
 
@@ -74,7 +74,7 @@ public class RecentPurchaseSignListener implements Listener {
             SerializedBlockLocation location = BukkitSerializedBlockLocation.create(event.getBlock().getLocation());
 
             if (plugin.getRecentPurchaseSignStorage().containsLocation(location)) {
-                if (!event.getPlayer().hasPermission("buycraft.admin")) {
+                if (!event.getPlayer().hasPermission("tebex.admin")) {
                     event.getPlayer().sendMessage(ChatColor.RED + "You don't have permission to break this sign.");
                     event.setCancelled(true);
                     return;
@@ -90,7 +90,7 @@ public class RecentPurchaseSignListener implements Listener {
             Location onFace = event.getBlock().getRelative(face).getLocation();
             SerializedBlockLocation onFaceSbl = BukkitSerializedBlockLocation.create(onFace);
             if (plugin.getRecentPurchaseSignStorage().containsLocation(onFaceSbl)) {
-                if (!event.getPlayer().hasPermission("buycraft.admin")) {
+                if (!event.getPlayer().hasPermission("tebex.admin")) {
                     event.getPlayer().sendMessage(ChatColor.RED + "You don't have permission to break this sign.");
                     event.setCancelled(true);
                     return;

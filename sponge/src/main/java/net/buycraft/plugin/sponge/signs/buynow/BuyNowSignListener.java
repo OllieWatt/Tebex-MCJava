@@ -43,7 +43,7 @@ public class BuyNowSignListener {
         boolean ourSign;
 
         try {
-            ourSign = event.getOriginalText().lines().get(0).toPlain().equalsIgnoreCase("[buycraft_buy]");
+            ourSign = event.getOriginalText().lines().get(0).toPlain().equalsIgnoreCase("[tebex_buy]");
         } catch (IndexOutOfBoundsException e) {
             return;
         }
@@ -61,8 +61,8 @@ public class BuyNowSignListener {
 
         Player player = pl.get();
 
-        if (!player.hasPermission("buycraft.admin")) {
-            event.getCause().first(Player.class).get().sendMessage(Text.builder("You can't create Buycraft signs.").color(TextColors.RED).build());
+        if (!player.hasPermission("tebex.admin")) {
+            event.getCause().first(Player.class).get().sendMessage(Text.builder("You can't create Tebex signs.").color(TextColors.RED).build());
             return;
         }
 
@@ -102,7 +102,7 @@ public class BuyNowSignListener {
 
     private boolean removeSign(Player player, SerializedBlockLocation location) {
         if (plugin.getBuyNowSignStorage().containsLocation(location)) {
-            if (!player.hasPermission("buycraft.admin")) {
+            if (!player.hasPermission("tebex.admin")) {
                 player.sendMessage(Text.builder("You don't have permission to break this sign.").color(TextColors.RED).build());
                 return false;
             }

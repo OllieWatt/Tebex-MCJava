@@ -44,7 +44,7 @@ public class BuyNowSignListener implements Listener {
     public void onSignChange(SignChangeEvent event) {
         boolean relevant;
         try {
-            relevant = event.getLine(0).equalsIgnoreCase("[buycraft_buy]");
+            relevant = event.getLine(0).equalsIgnoreCase("[tebex_buy]");
         } catch (IndexOutOfBoundsException e) {
             return;
         }
@@ -52,7 +52,7 @@ public class BuyNowSignListener implements Listener {
         if (!relevant)
             return;
 
-        if (!event.getPlayer().hasPermission("buycraft.admin")) {
+        if (!event.getPlayer().hasPermission("tebex.admin")) {
             event.getPlayer().sendMessage(ChatColor.RED + "You don't have permission to create this sign.");
             return;
         }
@@ -102,7 +102,7 @@ public class BuyNowSignListener implements Listener {
                 @Override
                 public void run() {
                     if ((event.getPlayer().getOpenInventory().getTopInventory() == null ||
-                            !event.getPlayer().getOpenInventory().getTopInventory().getTitle().startsWith("Buycraft: ")) &&
+                            !event.getPlayer().getOpenInventory().getTopInventory().getTitle().startsWith("Tebex: ")) &&
                             settingUpSigns.remove(event.getPlayer().getUniqueId()) != null &&
                             event.getPlayer() instanceof Player) {
                         ((Player) event.getPlayer()).sendMessage(ChatColor.RED + "Buy sign set up cancelled.");
@@ -117,7 +117,7 @@ public class BuyNowSignListener implements Listener {
         if (event.getBlock().getType() == Material.WALL_SIGN || event.getBlock().getType() == Material.LEGACY_SIGN_POST) {
             SerializedBlockLocation location = BukkitSerializedBlockLocation.create(event.getBlock().getLocation());
             if (plugin.getBuyNowSignStorage().containsLocation(location)) {
-                if (!event.getPlayer().hasPermission("buycraft.admin")) {
+                if (!event.getPlayer().hasPermission("tebex.admin")) {
                     event.getPlayer().sendMessage(ChatColor.RED + "You don't have permission to break this sign.");
                     event.setCancelled(true);
                     return;
@@ -135,7 +135,7 @@ public class BuyNowSignListener implements Listener {
             SerializedBlockLocation onFaceSbl = BukkitSerializedBlockLocation.create(onFace);
 
             if (plugin.getBuyNowSignStorage().containsLocation(onFaceSbl)) {
-                if (!event.getPlayer().hasPermission("buycraft.admin")) {
+                if (!event.getPlayer().hasPermission("tebex.admin")) {
                     event.getPlayer().sendMessage(ChatColor.RED + "You don't have permission to break this sign.");
                     event.setCancelled(true);
                     return;

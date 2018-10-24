@@ -31,7 +31,7 @@ public class ViewCategoriesGUI implements Listener {
 
     public ViewCategoriesGUI(BuycraftPlugin plugin) {
         this.plugin = plugin;
-        inventory = Bukkit.createInventory(null, 9, GUIUtil.trimName("Buycraft: " +
+        inventory = Bukkit.createInventory(null, 9, GUIUtil.trimName("Tebex: " +
                 plugin.getI18n().get("categories")));
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }

@@ -1,8 +1,8 @@
-name: BuycraftX
+name: Tebex-MCJava
 main: net.buycraft.plugin.nukkit.BuycraftPlugin
 version: "${project.version}"
-author: Buycraft
+author: Tebex
 api: [1.0.0, 2.0.0]
 commands:
-  buycraft:
-    description: Main command for the Buycraft plugin.
+  tebex:
+    description: Main command for the Tebex-MCJava plugin.

@@ -22,13 +22,13 @@ public class BuycraftCommand implements CommandExecutor {
         sender.sendMessage(TextFormat.DARK_AQUA + TextFormat.BOLD.toString() + plugin.getI18n().get("usage"));
 
         for (Map.Entry<String, Subcommand> entry : subcommandMap.entrySet()) {
-            sender.sendMessage(TextFormat.GREEN + "/buycraft " + entry.getKey() + TextFormat.GRAY + ": " + entry.getValue().getDescription());
+            sender.sendMessage(TextFormat.GREEN + "/tebex " + entry.getKey() + TextFormat.GRAY + ": " + entry.getValue().getDescription());
         }
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!sender.hasPermission("buycraft.admin")) {
+        if (!sender.hasPermission("tebex.admin")) {
             sender.sendMessage(TextFormat.RED + plugin.getI18n().get("no_permission"));
             return true;
         }

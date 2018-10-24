@@ -60,7 +60,7 @@ import java.nio.file.Path;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-@Plugin(id = "buycraft", name = "Buycraft", version = BuycraftPlugin.MAGIC_VERSION)
+@Plugin(id = "tebex-mcjava", name = "Tebex-MCJava", version = BuycraftPlugin.MAGIC_VERSION)
 public class BuycraftPlugin {
 
     static final String MAGIC_VERSION = "SET_BY_MAGIC";
@@ -155,14 +155,14 @@ public class BuycraftPlugin {
 
         String serverKey = configuration.getServerKey();
         if (serverKey == null || serverKey.equals("INVALID")) {
-            getLogger().info("Looks like this is a fresh setup. Get started by using 'buycraft secret <key>' in the console.");
+            getLogger().info("Looks like this is a fresh setup. Get started by using 'tebex secret <key>' in the console.");
         } else {
             getLogger().info("Validating your server key...");
             ApiClient client = new ProductionApiClient(configuration.getServerKey(), httpClient);
             try {
                 updateInformation(client);
             } catch (IOException | ApiException e) {
-                getLogger().error(String.format("We can't check if your server can connect to Buycraft: %s", e.getMessage()));
+                getLogger().error(String.format("We can't check if your server can connect to Tebex: %s", e.getMessage()));
             }
             apiClient = client;
         }
@@ -261,7 +261,7 @@ public class BuycraftPlugin {
         Sponge.getEventManager().registerListeners(this, new RecentPurchaseSignListener(this));
         Sponge.getEventManager().registerListeners(this, new BuyNowSignListener(this));
 
-        Sponge.getCommandManager().register(this, buildCommands(), "buycraft");
+        Sponge.getCommandManager().register(this, buildCommands(), "TEBEX");
         Sponge.getCommandManager().register(this, CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_sponge_listing")))
                 .executor(new ListPackagesCmd(this))
@@ -297,19 +297,19 @@ public class BuycraftPlugin {
     private CommandSpec buildCommands() {
         CommandSpec refresh = CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_refresh")))
-                .permission("buycraft.admin")
+                .permission("tebex.admin")
                 .executor(new RefreshCmd(this))
                 .build();
         CommandSpec secret = CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_secret")))
-                .permission("buycraft.admin")
+                .permission("tebex.admin")
                 .arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("secret"))))
                 .executor(new SecretCmd(this))
                 .build();
         CommandSpec report = CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_report")))
                 .executor(new ReportCmd(this))
-                .permission("buycraft.admin")
+                .permission("tebex.admin")
                 .build();
         CommandSpec info = CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_information")))
@@ -318,11 +318,11 @@ public class BuycraftPlugin {
         CommandSpec forcecheck = CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_forcecheck")))
                 .executor(new ForceCheckCmd(this))
-                .permission("buycraft.admin")
+                .permission("tebex.admin")
                 .build();
         CommandSpec coupon = buildCouponCommands();
         return CommandSpec.builder()
-                .description(Text.of("Main command for the Buycraft plugin."))
+                .description(Text.of("Main command for the Tebex plugin."))
                 .child(report, "report")
                 .child(secret, "secret")
                 .child(refresh, "refresh")
@@ -344,7 +344,7 @@ public class BuycraftPlugin {
                 .build();
         return CommandSpec.builder()
                 .description(Text.of(i18n.get("usage_coupon")))
-                .permission("buycraft.admin")
+                .permission("tebex.admin")
                 .child(create, "create")
                 .child(delete, "delete")
                 .build();
@@ -362,7 +362,7 @@ public class BuycraftPlugin {
                     " a proxy and server combination (such as BungeeCord/Spigot or LilyPad/Connect) that corrects UUIDs, then" +
                     " you may experience issues with packages not applying.");
             getLogger().warn("If you have verified that your set up is correct, you can suppress this message by setting " +
-                    "is-bungeecord=true in your BuycraftX config.properties.");
+                    "is-bungeecord=true in your Tebex config.properties.");
         }
     }
 

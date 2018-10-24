@@ -20,7 +20,7 @@ public class BuycraftCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!sender.hasPermission("buycraft.admin")) {
+        if (!sender.hasPermission("tebex.admin")) {
             sender.sendMessage(ChatColor.RED + plugin.getI18n().get("no_permission"));
             return true;
         }
@@ -47,7 +47,7 @@ public class BuycraftCommand implements CommandExecutor {
         sender.sendMessage(ChatColor.DARK_AQUA + ChatColor.BOLD.toString() + plugin.getI18n().get("usage"));
 
         for (Map.Entry<String, Subcommand> entry : subcommandMap.entrySet()) {
-            sender.sendMessage(ChatColor.GREEN + "/buycraft " + entry.getKey() + ChatColor.GRAY + ": " + entry.getValue().getDescription());
+            sender.sendMessage(ChatColor.GREEN + "/tebex " + entry.getKey() + ChatColor.GRAY + ": " + entry.getValue().getDescription());
         }
     }
 }

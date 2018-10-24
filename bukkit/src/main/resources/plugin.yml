@@ -1,0 +1,8 @@
+name: BuycraftX
+main: net.buycraft.plugin.bukkit.BuycraftPlugin
+version: ${project.version}
+author: Buycraft
+commands:
+  buycraft:
+    description: Main command for the Buycraft plugin.
+api-version: 1.13

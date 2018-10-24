@@ -1,9 +1,9 @@
-name: BuycraftX
+name: Tebex-MCJava
 main: net.buycraft.plugin.bukkit.BuycraftPlugin
 version: ${project.version}
 author: Buycraft
 softdepend: [ProtocolLib]
 commands:
   buycraft:
-    description: Main command for the Buycraft plugin.
+    description: Main command for the Tebex-MCJava plugin.
 api-version: 1.13

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.buycraft</groupId>
-    <artifactId>BuycraftX</artifactId>
+    <artifactId>Tebex-MCJava</artifactId>
     <packaging>pom</packaging>
     <version>11.0.0</version>
     <modules>

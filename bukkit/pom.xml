@@ -3,13 +3,13 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>BuycraftX</artifactId>
+        <artifactId>Tebex-MCJava</artifactId>
         <groupId>net.buycraft</groupId>
         <version>11.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>buycraftx-bukkit</artifactId>
+    <artifactId>tebex-mcjava-bukkit</artifactId>
     <build>
         <resources>
             <resource>
@@ -81,7 +81,7 @@
         </dependency>
         <dependency>
             <groupId>net.buycraft</groupId>
-            <artifactId>buycraftx-plugin-shared</artifactId>
+            <artifactId>tebex-mcjava-plugin-shared</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>

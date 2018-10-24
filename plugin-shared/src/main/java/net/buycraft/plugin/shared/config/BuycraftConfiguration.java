@@ -47,6 +47,20 @@ public class BuycraftConfiguration {
         return properties.getProperty("server-key", null);
     }
 
+    public boolean isPushCommandsEnabled() {
+        return getBoolean("push-commands", false);
+    }
+
+    public Integer getPushCommandsPort() {
+        String value = properties.getProperty("push-commands", "8282");
+
+        if(value == null || value.equalsIgnoreCase("false")) {
+            return null;
+        }
+
+        return Integer.valueOf(value);
+    }
+
     public void setServerKey(String key) {
         properties.setProperty("server-key", key);
     }
@@ -94,6 +108,10 @@ public class BuycraftConfiguration {
         return new BuycraftI18n(getLocale());
     }
 
+    public int getCommandsPerTick() {
+        return Integer.parseInt(properties.getProperty("commands-per-tick", "10"));
+    }
+
     public void fillDefaults() {
         defaultSet("server-key", "INVALID");
         defaultSet("is-bungeecord", "false");
@@ -102,5 +120,6 @@ public class BuycraftConfiguration {
         defaultSet("buy-command-name", "buy");
         defaultSet("language", Locale.getDefault().toLanguageTag());
         defaultSet("verbose", "true");
+        defaultSet("push-commands", "false");
     }
 }

@@ -1,5 +1,6 @@
 package net.buycraft.plugin.execution.strategy;
 
+import lombok.Setter;
 import net.buycraft.plugin.IBuycraftPlatform;
 import net.buycraft.plugin.platform.NoBlocking;
 
@@ -10,8 +11,9 @@ import java.util.logging.Level;
 
 public class QueuedCommandExecutor implements CommandExecutor, Runnable {
     private static final long MAXIMUM_NOTIFICATION_TIME = TimeUnit.MILLISECONDS.toNanos(5);
-    private static final int RUN_MAX_COMMANDS_BLOCKING = 10;
 
+    @Setter
+    private int runMaxCommandsBlocking = 10;
     private final IBuycraftPlatform platform;
     private final boolean blocking;
     private final Set<ToRunQueuedCommand> commandQueue = new LinkedHashSet<>();
@@ -34,21 +36,44 @@ public class QueuedCommandExecutor implements CommandExecutor, Runnable {
     public void run() {
         List<ToRunQueuedCommand> runThisTick = new ArrayList<>();
         synchronized (commandQueue) {
-            for (Iterator<ToRunQueuedCommand> it = commandQueue.iterator(); it.hasNext(); ) {
-                ToRunQueuedCommand command = it.next();
-                if (command.canExecute(platform)) {
-                    runThisTick.add(command);
-                    it.remove();
+            ArrayList<Integer> queuedCommandIds = new ArrayList<>();
+
+            Set<ToRunQueuedCommand> removeSet = new HashSet<ToRunQueuedCommand>();
+
+
+            for (ToRunQueuedCommand command : commandQueue) {
+                if(queuedCommandIds.contains(command.getCommand().getId())){
+                    removeSet.add(command);
+                    continue;
                 }
 
-                if (blocking && runThisTick.size() >= RUN_MAX_COMMANDS_BLOCKING) {
+                queuedCommandIds.add(command.getCommand().getId());
+
+                if (command.canExecute(platform)) {
+                    runThisTick.add(command);
+                    //it.remove();
+                    removeSet.add(command);
+                }
+
+                if (blocking && runThisTick.size() >= runMaxCommandsBlocking) {
                     break;
                 }
             }
+
+            commandQueue.removeAll(removeSet);
+
         }
+
 
         long start = System.nanoTime();
         for (ToRunQueuedCommand command : runThisTick) {
+            if(completedCommandsTask.getRetained().contains(command.getCommand().getId())){
+                synchronized (commandQueue) {
+                    commandQueue.remove(command);
+                }
+                continue;
+            }
+
             if(command.canExecute(platform)) {
                 String finalCommand = platform.getPlaceholderManager().doReplace(command.getPlayer(), command.getCommand());
                 platform.log(Level.INFO, String.format("Dispatching command '%s' for player '%s'.", finalCommand, command.getPlayer().getName()));

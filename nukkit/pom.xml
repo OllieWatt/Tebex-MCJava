@@ -5,7 +5,7 @@
     <parent>
         <artifactId>BuycraftX</artifactId>
         <groupId>net.buycraft</groupId>
-        <version>10.6.2</version>
+        <version>11.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -40,10 +40,6 @@
                     </artifactSet>
                     <relocations>
                         <relocation>
-                            <pattern>com.bugsnag</pattern>
-                            <shadedPattern>net.buycraft.plugin.internal.bugsnag</shadedPattern>
-                        </relocation>
-                        <relocation>
                             <pattern>okhttp3</pattern>
                             <shadedPattern>net.buycraft.plugin.internal.okhttp3</shadedPattern>
                         </relocation>
@@ -77,7 +73,7 @@
     <repositories>
         <repository>
             <id>zxda-nukkit-repo</id>
-            <url>http://ci.mengcraft.com:8080/job/nukkit/lastSuccessfulBuild/maven-repository/repository/</url>
+            <url>https://repo.nukkitx.com/maven-snapshots/</url>
         </repository>
     </repositories>
 
